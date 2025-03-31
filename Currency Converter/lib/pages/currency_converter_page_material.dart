@@ -86,14 +86,28 @@ class currency_converter_material_page extends StatelessWidget {
               ),
               // button
               // 1 : look like text
-              TextButton(
-                onPressed: () {
-                  print("button q dabaya");
-                },
-                child: Text("Convert", style: TextStyle(color: Colors.white)),
+              Container(
+                padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
+                child: TextButton(
+                  onPressed: () {
+                    // debug ,  release ,  profile
+                    debugPrint("button q dabaya");
+                  },
+                  style: const ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(
+                      Color.fromARGB(143, 167, 0, 0),
+                    ),
+                    // foregroundColor: WidgetStatePropertyAll(Colors.cyanAccent)
+                    minimumSize: WidgetStatePropertyAll(
+                      //* there's no sense in using maxSize: double.infinity in most cases.
+                      Size(double.infinity, 50),
+                    ), // not resposive
+                  ),
+                  child: Text("Convert", style: TextStyle(color: Colors.white)),
+                ),
               ),
 
-              // 2 : look like button
+              // 2 : look like  button
             ],
           ),
         ),
