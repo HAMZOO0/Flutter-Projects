@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
+// 1 : create a variable which store the convertedd currency value
+// 2 : create a function which multiplay the value of conversion which text field give us
+// 3: store value which we created
+// 4 : display it
 
-class currency_converter_material_page extends StatelessWidget {
-  const currency_converter_material_page({super.key});
+class CurrencyConverterPageMaterial__statefull extends StatefulWidget {
+  const CurrencyConverterPageMaterial__statefull({super.key});
 
   @override
+  State<CurrencyConverterPageMaterial__statefull> createState() =>
+      _CurrencyConverterPageMaterial__state();
+}
+
+class _CurrencyConverterPageMaterial__state
+    extends State<CurrencyConverterPageMaterial__statefull> {
+  @override
+  void initState() {
+    print("build init state");
+    super.initState();
+  }
+
+  double result = 0;
+  final TextEditingController textEditingController = TextEditingController();
+
   Widget build(BuildContext context) {
+    print("bulding ");
     return MaterialApp(
       home: Scaffold(
         backgroundColor: const Color.fromARGB(230, 0, 0, 0), // main background
@@ -12,6 +32,7 @@ class currency_converter_material_page extends StatelessWidget {
           // app bar
           title: const Text(
             'Currency Converter', // app bar title
+
             style: TextStyle(color: Colors.white),
           ),
           leading: Icon(
@@ -31,8 +52,8 @@ class currency_converter_material_page extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Text(
-                "0",
+              Text(
+                result.toString(),
                 style: TextStyle(
                   color: Color.fromARGB(143, 185, 185, 185),
                   fontSize: 30,
@@ -50,6 +71,10 @@ class currency_converter_material_page extends StatelessWidget {
                 ), // this is from all sides padding l ,   t , r , b it is in pixxels (3.4 pixles )
                 margin: EdgeInsets.fromLTRB(.1, 0, .1, 0), // this is
                 child: TextField(
+                  // onSubmitted: (value) {
+                  //   print(value);
+                  // },
+                  controller: textEditingController,
                   style: TextStyle(color: Colors.white),
                   keyboardType: TextInputType.numberWithOptions(
                     decimal: true,
@@ -84,14 +109,26 @@ class currency_converter_material_page extends StatelessWidget {
                   ),
                 ),
               ),
+
               // button
-              // 1 : look like text
+              // 1 : look like text - > TextButton
+              // 2 : elevated button
               Container(
                 padding: const EdgeInsets.fromLTRB(10, 15, 10, 0),
-                child: TextButton(
+                child: ElevatedButton(
                   onPressed: () {
                     // debug ,  release ,  profile
-                    debugPrint("button q dabaya");
+                    // print(textEditingController.text);
+                    // result = double.parse(textEditingController.text);
+                    // print(result * 280.60);
+
+                    // here we setting the state
+                    setState(() {
+                      // we also put this function empty it just use to tell widght tree to update
+                      result = double.parse(textEditingController.text);
+                      result *= 280.60;
+                    });
+                    // build(context);
                   },
                   style: const ButtonStyle(
                     backgroundColor: WidgetStatePropertyAll(
@@ -99,15 +136,14 @@ class currency_converter_material_page extends StatelessWidget {
                     ),
                     // foregroundColor: WidgetStatePropertyAll(Colors.cyanAccent)
                     minimumSize: WidgetStatePropertyAll(
+                      // fixsize is not resposive
                       //* there's no sense in using maxSize: double.infinity in most cases.
                       Size(double.infinity, 50),
-                    ), // not resposive
+                    ),
                   ),
                   child: Text("Convert", style: TextStyle(color: Colors.white)),
                 ),
               ),
-
-              // 2 : look like  button
             ],
           ),
         ),
