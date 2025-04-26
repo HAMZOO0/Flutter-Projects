@@ -53,7 +53,7 @@ class _CurrencyConverterPageMaterial__state
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                result.toString(),
+                'PKR : ${result.toString()}',
                 style: TextStyle(
                   color: Color.fromARGB(143, 185, 185, 185),
                   fontSize: 30,
