@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 class WeatherScreen extends StatelessWidget {
@@ -27,6 +29,56 @@ class WeatherScreen extends StatelessWidget {
           //   child: const Icon(Icons.refresh),
           // ),
         ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            //main card
+            SizedBox(
+              width: double.infinity,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                elevation: 40,
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 15, sigmaY: 5),
+
+                  child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        Text(
+                          '26° C ',
+                          style: TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Icon(Icons.cloud, size: 64),
+                        const SizedBox(height: 16),
+
+                        Text("Rain", style: TextStyle(fontSize: 20)),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20), // use to add some space
+            const Placeholder(
+              fallbackHeight: 120,
+              //  child: const Text("hi")
+            ),
+            const SizedBox(height: 20), // use to add some space
+            const Placeholder(
+              fallbackHeight: 120,
+              //  child: const Text("hi")
+            ),
+          ],
+        ),
       ),
     );
   }
