@@ -31,7 +31,7 @@ class WeatherScreen extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(10.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -80,43 +80,19 @@ class WeatherScreen extends StatelessWidget {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 20), // use to add some space
-            Row(
-              children: [
-                SizedBox(
-                  width: 100,
-                  child: Card(D
-                    elevation: 6,
-
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                      ), // use to add boarder radius
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            "03:00",
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 8), // use to add some space
-                          Icon(Icons.cloud, size: 32),
-                          const SizedBox(height: 8), // use to add some space
-                          Text(
-                            "32° C",
-                            // style: TextStyle(
-                            //   fontSize: 16,
-                            //   fontWeight: FontWeight.bold,
-                            // ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
+            SingleChildScrollView(
+              scrollDirection:
+                  Axis.horizontal, // by default SingleChildScrollView widget scroll vertically
+              child: Row(
+                children: [
+                  weather_card(),
+                  weather_card(),
+                  weather_card(),
+                  weather_card(),
+                  weather_card(),
+                  weather_card(),
+                 ],
+              ),
             ),
             const Placeholder(
               fallbackHeight: 120,
@@ -128,6 +104,46 @@ class WeatherScreen extends StatelessWidget {
               //  child: const Text("hi")
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+// here i extracted the weather_card
+class weather_card extends StatelessWidget {
+  const weather_card({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 100,
+      child: Card(
+        elevation: 6,
+
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+          ), // use to add boarder radius
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              Text(
+                "03:00",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8), // use to add some space
+              Icon(Icons.cloud, size: 32),
+              const SizedBox(height: 8), // use to add some space
+              Text(
+                "32° C",
+                // style: TextStyle(
+                //   fontSize: 16,
+                //   fontWeight: FontWeight.bold,
+                // ),
+              ),
+            ],
+          ),
         ),
       ),
     );
