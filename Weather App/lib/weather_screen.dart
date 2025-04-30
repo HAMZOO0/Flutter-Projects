@@ -51,19 +51,19 @@ class WeatherScreen extends StatelessWidget {
                     filter: ImageFilter.blur(sigmaX: 15, sigmaY: 5),
 
                     child: Padding(
-                      padding: EdgeInsets.all(16.0),
+                      padding: EdgeInsets.all(12.0),
                       child: Column(
                         children: [
                           Text(
                             '26° C ',
                             style: TextStyle(
-                              fontSize: 32,
+                              fontSize: 30,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const SizedBox(height: 16),
-                          Icon(Icons.cloud, size: 64),
-                          const SizedBox(height: 16),
+                          const SizedBox(height: 10),
+                          Icon(Icons.cloud, size: 50),
+                          const SizedBox(height: 10),
 
                           Text("Rain", style: TextStyle(fontSize: 20)),
                         ],
@@ -73,13 +73,13 @@ class WeatherScreen extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20), // use to add some space
+            const SizedBox(height: 16), // use to add some space
             const Text(
               // we also use align widget use to algin it like left  , right  , we also use contanier
               "Weather Forecast",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 20), // use to add some space
+            const SizedBox(height: 16), // use to add some space
             SingleChildScrollView(
               scrollDirection:
                   Axis.horizontal, // by default SingleChildScrollView widget scroll vertically
@@ -91,14 +91,16 @@ class WeatherScreen extends StatelessWidget {
                   weather_card(),
                   weather_card(),
                   weather_card(),
-                 ],
+                ],
               ),
             ),
-            const Placeholder(
-              fallbackHeight: 120,
-              //  child: const Text("hi")
+
+            const SizedBox(height: 16), // use to add some space
+            const Text(
+              // we also use align widget use to algin it like left  , right  , we also use contanier
+              "Weather Forecast",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 20), // use to add some space
             const Placeholder(
               fallbackHeight: 120,
               //  child: const Text("hi")
