@@ -84,7 +84,7 @@ class WeatherScreen extends StatelessWidget {
               children: [
                 SizedBox(
                   width: 100,
-                  child: Card(
+                  child: Card(D
                     elevation: 6,
 
                     child: Container(
