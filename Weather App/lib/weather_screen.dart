@@ -1,6 +1,7 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'hourly_weather_card.dart';
+import 'additional_information_card.dart';
 
 class WeatherScreen extends StatelessWidget {
   const WeatherScreen({super.key});
@@ -51,7 +52,7 @@ class WeatherScreen extends StatelessWidget {
                     filter: ImageFilter.blur(sigmaX: 15, sigmaY: 5),
 
                     child: Padding(
-                      padding: EdgeInsets.all(12.0),
+                      padding: EdgeInsets.all(20.0),
                       child: Column(
                         children: [
                           Text(
@@ -98,54 +99,36 @@ class WeatherScreen extends StatelessWidget {
             const SizedBox(height: 16), // use to add some space
             const Text(
               // we also use align widget use to algin it like left  , right  , we also use contanier
-              "Weather Forecast",
+              "Additional Information",
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
-            const Placeholder(
-              fallbackHeight: 120,
-              //  child: const Text("hi")
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const SizedBox(height: 16), // use to add some space
+
+                additional_information(
+                  icon: Icons.water_drop,
+                  label: "Humidity",
+                  value: "90",
+                ),
+                additional_information(
+                  icon: Icons.air,
+                  label: "Wind Speed",
+                  value: "94",
+                ),
+
+                additional_information(
+                  icon: Icons.speed,
+                  label: "Pressure",
+                  value: "94",
+                ),
+
+                const SizedBox(height: 16), // use to add some space
+              ],
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-// here i extracted the weather_card
-class weather_card extends StatelessWidget {
-  const weather_card({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 100,
-      child: Card(
-        elevation: 6,
-
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-          ), // use to add boarder radius
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              Text(
-                "03:00",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 8), // use to add some space
-              Icon(Icons.cloud, size: 32),
-              const SizedBox(height: 8), // use to add some space
-              Text(
-                "32° C",
-                // style: TextStyle(
-                //   fontSize: 16,
-                //   fontWeight: FontWeight.bold,
-                // ),
-              ),
-            ],
-          ),
         ),
       ),
     );
