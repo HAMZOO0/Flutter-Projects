@@ -1,10 +1,23 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'hourly_weather_card.dart';
 import 'additional_information_card.dart';
+import 'package:http/http.dart' as http;
 
 class WeatherScreen extends StatelessWidget {
   const WeatherScreen({super.key});
+
+  // asunc function to get future data
+  Future getWeatherData() async {
+    final String city = 'Quetta,PK';
+    String apiKey = dotenv.env['API_KEY'] ?? ''; // 👈 Get API key from .env
+    final String url =
+        'http://api.openweathermap.org/data/2.5/forecast?q=$city&appid=$apiKey';
+
+    http.get(Uri.parse(url));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
