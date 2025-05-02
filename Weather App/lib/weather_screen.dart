@@ -86,12 +86,31 @@ class WeatherScreen extends StatelessWidget {
                   Axis.horizontal, // by default SingleChildScrollView widget scroll vertically
               child: Row(
                 children: [
-                  weather_card(),
-                  weather_card(),
-                  weather_card(),
-                  weather_card(),
-                  weather_card(),
-                  weather_card(),
+                  weather_card(
+                    time: "2:00",
+                    temprature: "30",
+                    icon: Icons.cloud,
+                  ),
+                  weather_card(
+                    time: "5:00",
+                    temprature: "28",
+                    icon: Icons.wb_sunny,
+                  ),
+                  weather_card(
+                    time: "8:00",
+                    temprature: "25",
+                    icon: Icons.nightlight_round,
+                  ),
+                  weather_card(
+                    time: "11:00",
+                    temprature: "22",
+                    icon: Icons.cloudy_snowing,
+                  ),
+                  weather_card(
+                    time: "2:00",
+                    temprature: "20r",
+                    icon: Icons.storm,
+                  ),
                 ],
               ),
             ),
@@ -116,13 +135,13 @@ class WeatherScreen extends StatelessWidget {
                 additional_information(
                   icon: Icons.air,
                   label: "Wind Speed",
-                  value: "94",
+                  value: "6.6",
                 ),
 
                 additional_information(
                   icon: Icons.speed,
                   label: "Pressure",
-                  value: "94",
+                  value: "800",
                 ),
 
                 const SizedBox(height: 16), // use to add some space

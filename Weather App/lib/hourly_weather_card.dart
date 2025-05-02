@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 class weather_card extends StatelessWidget {
-  const weather_card({super.key});
+  final String time;
+  final String temprature;
+  final IconData icon;
+  const weather_card({
+    super.key,
+    required this.time,
+    required this.temprature,
+    required this.icon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +26,14 @@ class weather_card extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                "03:00",
+                time,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8), // use to add some space
-              Icon(Icons.cloud, size: 32),
+              Icon(icon, size: 32),
               const SizedBox(height: 8), // use to add some space
               Text(
-                "32° C",
+                "${temprature}° C",
                 // style: TextStyle(
                 //   fontSize: 16,
                 //   fontWeight: FontWeight.bold,
