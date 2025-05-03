@@ -33,7 +33,7 @@ class weather_card extends StatelessWidget {
               Icon(icon, size: 32),
               const SizedBox(height: 8), // use to add some space
               Text(
-                "${temprature}° C",
+                "$temprature° C",
                 // style: TextStyle(
                 //   fontSize: 16,
                 //   fontWeight: FontWeight.bold,

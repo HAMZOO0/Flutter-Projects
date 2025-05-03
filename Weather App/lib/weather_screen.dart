@@ -1,25 +1,73 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart'; //https://pub.dev/packages/flutter_dotenv
 import 'hourly_weather_card.dart';
 import 'additional_information_card.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert'; // for json convertion
 
-class WeatherScreen extends StatelessWidget {
+class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
 
+  @override
+  State<WeatherScreen> createState() => _WeatherScreenState();
+}
+
+class _WeatherScreenState extends State<WeatherScreen> {
+  dynamic data =
+      0; // in dynamic we set int type data then we change to string or other in future :) => mara opna orignal comment aa
+  dynamic date = 0;
+  dynamic temp = 0;
+
+  @override
+  void initState() {
+    print("init state");
+    super.initState();
+    print("api call");
+    getWeatherData();
+  }
+
   // asunc function to get future data
-  Future getWeatherData() async {
+  Future<void> getWeatherData() async {
+    print("function body inter");
+
     final String city = 'Quetta,PK';
-    String apiKey = dotenv.env['API_KEY'] ?? ''; // 👈 Get API key from .env
+
+    String apiKey = dotenv.env['API_KEY'] ?? ''; // <-- API key from .env
     final String url =
         'http://api.openweathermap.org/data/2.5/forecast?q=$city&appid=$apiKey';
 
-    http.get(Uri.parse(url));
+    print("📡 API Call: $url");
+
+    final response = await http.get(Uri.parse(url));
+    // print('response.statusCode :: ${response.statusCode}');
+    if (response.statusCode == 200) {
+      try {
+        // decode JSON response
+        data = jsonDecode(response.body);
+        setState(() {
+          temp =
+              (data['list'][0]['main']['temp']) -
+              273.15; // convert into kelven to clelce
+        });
+        date = (data['list'][0]['dt_txt']);
+
+        print("🌆 City: $city");
+        print("🌡️ Temp: $temp");
+        print("📅 Date: $date");
+      } catch (e) {
+        print("❌ JSON Decode Error: $e");
+      }
+    } else {
+      print("❌ HTTP Error: ${response.statusCode}");
+      print("Message: ${response.body}");
+    }
+    print("funiotn bodu end");
   }
 
   @override
   Widget build(BuildContext context) {
+    print("buding start $temp");
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -31,7 +79,7 @@ class WeatherScreen extends StatelessWidget {
           IconButton(
             // IconButton more good click effect
             onPressed: () {
-              print('refresh btn clicked');
+              print('refresh button pressed');
             },
             icon: const Icon(Icons.refresh),
           ),
@@ -69,7 +117,7 @@ class WeatherScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Text(
-                            '26° C ',
+                            '${temp.toStringAsFixed(2)}° C ', // toStringAsFixed(2) use to print jsut 2 value of floating point
                             style: TextStyle(
                               fontSize: 30,
                               fontWeight: FontWeight.bold,
