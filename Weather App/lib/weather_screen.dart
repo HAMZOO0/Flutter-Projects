@@ -17,8 +17,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
   dynamic data =
       0; // in dynamic we set int type data then we change to string or other in future :) => mara opna orignal comment aa
 
-  // asunc function to get future data
-  Future getWeatherData() async {
+  // async function to get future data
+  Future<Map<String, dynamic>> getWeatherData() async {
     final String city = 'Quetta,PK';
 
     String apiKey = dotenv.env['API_KEY'] ?? ''; // <-- API key from .env
@@ -36,10 +36,12 @@ class _WeatherScreenState extends State<WeatherScreen> {
         return data;
       } catch (e) {
         print("❌ JSON Decode Error: $e");
+        throw Exception("JSON decoding failed");
       }
     } else {
       print("❌ HTTP Error: ${response.statusCode}");
       print("Message: ${response.body}");
+      throw Exception("Failed to fetch weather data");
     }
   }
 
@@ -81,6 +83,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
           if (snapshot.hasError) {
             return Text(snapshot.error.toString());
           }
+          //               (data['list'][0]['main']['temp']) -   273.15;
+          final data = snapshot.data!;
+          final currenTemp = (data['list'][0]['main']['temp']) - 273.15;
+
           return Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
@@ -106,7 +112,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           child: Column(
                             children: [
                               Text(
-                                '20',
+                                '$currenTemp',
                                 // ${temp.toStringAsFixed(2)}° C
                                 // toStringAsFixed(2) use to print jsut 2 value of floating point
                                 style: TextStyle(
