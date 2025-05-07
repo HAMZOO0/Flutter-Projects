@@ -1,3 +1,4 @@
+// import 'dart:nativewrappers/_internal/vm/lib/ffi_dynamic_library_patch.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart'; //https://pub.dev/packages/flutter_dotenv
@@ -84,9 +85,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
             return Text(snapshot.error.toString());
           }
           //               (data['list'][0]['main']['temp']) -   273.15;
-          final data = snapshot.data!;
-          final currenTemp = (data['list'][0]['main']['temp']) - 273.15;
+          final data = snapshot.data!; // ! why !
+          final currentTemperature = (data['list'][0]['main']['temp']) - 273.15;
+          final currentWeatherCondition = data['list'][0]['weather'][0]['main'];
 
+          String iconCode = data['list'][0]['weather'][0]['icon'];
+          final icon_url =
+              'https://openweathermap.org/img/wn/$iconCode@2x.png'; // here i put icon code in url
           return Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
@@ -112,7 +117,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                           child: Column(
                             children: [
                               Text(
-                                '$currenTemp',
+                                '${currentTemperature.toStringAsFixed(2)}° C ',
                                 // ${temp.toStringAsFixed(2)}° C
                                 // toStringAsFixed(2) use to print jsut 2 value of floating point
                                 style: TextStyle(
@@ -121,10 +126,13 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                 ),
                               ),
                               const SizedBox(height: 10),
-                              Icon(Icons.cloud, size: 50),
+                              Image.network(icon_url),
                               const SizedBox(height: 10),
 
-                              Text("Rain", style: TextStyle(fontSize: 20)),
+                              Text(
+                                currentWeatherCondition, // string here
+                                style: TextStyle(fontSize: 20),
+                              ),
                             ],
                           ),
                         ),
