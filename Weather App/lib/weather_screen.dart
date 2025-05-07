@@ -26,7 +26,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
     final String url =
         'http://api.openweathermap.org/data/2.5/forecast?q=$city&appid=$apiKey';
 
-    print("📡 API Call: $url");
+    // print("📡 API Call: $url");
 
     final response = await http.get(Uri.parse(url));
     // print('response.statusCode :: ${response.statusCode}');
@@ -76,8 +76,8 @@ class _WeatherScreenState extends State<WeatherScreen> {
         future: getWeatherData(),
         builder: (context, snapshot) {
           // print(context);
-          print(snapshot);
-          print(snapshot.data);
+          // print(snapshot);
+          // print(snapshot.data);
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           }
@@ -199,7 +199,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       value: "$pressure",
                     ),
 
-                    const SizedBox(height: 16), // use to add some space
+                    // const SizedBox(height: 16), // use to add some space
                   ],
                 ),
               ],
