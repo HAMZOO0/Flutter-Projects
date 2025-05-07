@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class weather_card extends StatelessWidget {
   final String time;
   final String temprature;
-  final IconData icon;
+  final String url;
   const weather_card({
     super.key,
     required this.time,
     required this.temprature,
-    required this.icon,
+    required this.url,
   });
 
   @override
@@ -30,7 +30,7 @@ class weather_card extends StatelessWidget {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8), // use to add some space
-              Icon(icon, size: 32),
+               Image.network(url),
               const SizedBox(height: 8), // use to add some space
               Text(
                 "$temprature° C",

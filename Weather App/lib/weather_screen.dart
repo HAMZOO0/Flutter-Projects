@@ -88,10 +88,14 @@ class _WeatherScreenState extends State<WeatherScreen> {
           final data = snapshot.data!; // ! why !
           final currentTemperature = (data['list'][0]['main']['temp']) - 273.15;
           final currentWeatherCondition = data['list'][0]['weather'][0]['main'];
-
           String iconCode = data['list'][0]['weather'][0]['icon'];
-          final icon_url =
+          final iconUrl =
               'https://openweathermap.org/img/wn/$iconCode@2x.png'; // here i put icon code in url
+
+          final humidity = data['list'][0]['main']['humidity'];
+          final pressure = data['list'][0]['main']['pressure'];
+          final windSpeed = data['list'][0]['wind']['speed'];
+
           return Padding(
             padding: const EdgeInsets.all(10.0),
             child: Column(
@@ -126,7 +130,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                 ),
                               ),
                               const SizedBox(height: 10),
-                              Image.network(icon_url),
+                              Image.network(iconUrl),
                               const SizedBox(height: 10),
 
                               Text(
@@ -143,7 +147,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 const SizedBox(height: 16), // use to add some space
                 const Text(
                   // we also use align widget use to algin it like left  , right  , we also use contanier
-                  "Weather Forecast",
+                  "Hourly Forecast",
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 16), // use to add some space
@@ -152,31 +156,16 @@ class _WeatherScreenState extends State<WeatherScreen> {
                       Axis.horizontal, // by default SingleChildScrollView widget scroll vertically
                   child: Row(
                     children: [
-                      weather_card(
-                        time: "2:00",
-                        temprature: "30",
-                        icon: Icons.cloud,
-                      ),
-                      weather_card(
-                        time: "5:00",
-                        temprature: "28",
-                        icon: Icons.wb_sunny,
-                      ),
-                      weather_card(
-                        time: "8:00",
-                        temprature: "25",
-                        icon: Icons.nightlight_round,
-                      ),
-                      weather_card(
-                        time: "11:00",
-                        temprature: "22",
-                        icon: Icons.cloudy_snowing,
-                      ),
-                      weather_card(
-                        time: "2:00",
-                        temprature: "20r",
-                        icon: Icons.storm,
-                      ),
+                      for (int i = 1; i <= 10; i++) ...[
+                        weather_card(
+                          time: data['list'][i]['dt_txt'].split(" ")[1],
+                          temprature: ((data['list'][i]['main']['temp']) -
+                                  273.15)
+                              .toStringAsFixed(2),
+                          url:
+                              'https://openweathermap.org/img/wn/${data['list'][i]['weather'][0]['icon']}@2x.png',
+                        ),
+                      ],
                     ],
                   ),
                 ),
@@ -196,18 +185,18 @@ class _WeatherScreenState extends State<WeatherScreen> {
                     additional_information(
                       icon: Icons.water_drop,
                       label: "Humidity",
-                      value: "90",
+                      value: "$humidity",
                     ),
                     additional_information(
                       icon: Icons.air,
                       label: "Wind Speed",
-                      value: "6.6",
+                      value: "$windSpeed",
                     ),
 
                     additional_information(
                       icon: Icons.speed,
                       label: "Pressure",
-                      value: "800",
+                      value: "$pressure",
                     ),
 
                     const SizedBox(height: 16), // use to add some space
