@@ -29,9 +29,9 @@ class weather_card extends StatelessWidget {
                 time,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-              const SizedBox(height: 8), // use to add some space
-               Image.network(url),
-              const SizedBox(height: 8), // use to add some space
+              const SizedBox(height: 5), // use to add some space
+              Image.network(url),
+              const SizedBox(height: 5), // use to add some space
               Text(
                 "$temprature° C",
                 // style: TextStyle(

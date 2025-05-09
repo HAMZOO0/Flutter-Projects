@@ -6,6 +6,8 @@ import 'hourly_weather_card.dart';
 import 'additional_information_card.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert'; // for json convertion
+// for date formatting
+import 'package:intl/intl.dart';
 
 class WeatherScreen extends StatefulWidget {
   const WeatherScreen({super.key});
@@ -129,9 +131,9 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 3),
                               Image.network(iconUrl),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 3),
 
                               Text(
                                 currentWeatherCondition, // string here
@@ -151,25 +153,44 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 16), // use to add some space
-                SingleChildScrollView(
-                  scrollDirection:
-                      Axis.horizontal, // by default SingleChildScrollView widget scroll vertically
-                  child: Row(
-                    children: [
-                      for (int i = 1; i <= 10; i++) ...[
-                        weather_card(
-                          time: data['list'][i]['dt_txt'].split(" ")[1],
-                          temprature: ((data['list'][i]['main']['temp']) -
-                                  273.15)
-                              .toStringAsFixed(2),
-                          url:
-                              'https://openweathermap.org/img/wn/${data['list'][i]['weather'][0]['icon']}@2x.png',
-                        ),
-                      ],
-                    ],
+                // SingleChildScrollView(
+                //   scrollDirection:
+                //       Axis.horizontal, // by default SingleChildScrollView widget scroll vertically
+                //   child: Row(
+                //     children: [
+                //       for (int i = 1; i <= 10; i++) ...[
+                // weather_card(
+                //   time: data['list'][i]['dt_txt'].split(" ")[1],
+                //   temprature: ((data['list'][i]['main']['temp']) -
+                //           273.15)
+                //       .toStringAsFixed(2),
+                //   url:
+                //       'https://openweathermap.org/img/wn/${data['list'][i]['weather'][0]['icon']}@2x.png',
+                // ),
+                //       ],
+                //     ],
+                //   ),
+                // ),
+                SizedBox(
+                  height: 160,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      final time = DateTime.parse(
+                        data['list'][index]['dt_txt'],
+                      );
+                      return weather_card(
+                        time: DateFormat.j().format(time),
+                        temprature: ((data['list'][index]['main']['temp']) -
+                                273.15)
+                            .toStringAsFixed(2),
+                        url:
+                            'https://openweathermap.org/img/wn/${data['list'][index]['weather'][0]['icon']}@2x.png',
+                      );
+                    },
                   ),
                 ),
-
                 const SizedBox(height: 16), // use to add some space
                 const Text(
                   // we also use align widget use to algin it like left  , right  , we also use contanier
