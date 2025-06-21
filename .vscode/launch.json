@@ -1,0 +1,88 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "BookBuddy",
+            "cwd": "BookBuddy",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "BookBuddy (profile mode)",
+            "cwd": "BookBuddy",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "BookBuddy (release mode)",
+            "cwd": "BookBuddy",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "chatbot",
+            "cwd": "chatbot",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "chatbot (profile mode)",
+            "cwd": "chatbot",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "chatbot (release mode)",
+            "cwd": "chatbot",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "Currency Converter",
+            "cwd": "Currency Converter",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Currency Converter (profile mode)",
+            "cwd": "Currency Converter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "Currency Converter (release mode)",
+            "cwd": "Currency Converter",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "Weather App",
+            "cwd": "Weather App",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "Weather App (profile mode)",
+            "cwd": "Weather App",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "Weather App (release mode)",
+            "cwd": "Weather App",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}

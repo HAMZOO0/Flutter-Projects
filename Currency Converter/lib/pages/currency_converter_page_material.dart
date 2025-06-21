@@ -75,6 +75,7 @@ class _CurrencyConverterPageMaterial__state
                   // onSubmitted: (value) {
                   //   print(value);
                   // },
+                   
                   controller: textEditingController,
                   style: TextStyle(color: Colors.white),
                   keyboardType: TextInputType.numberWithOptions(
